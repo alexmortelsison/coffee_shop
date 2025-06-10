@@ -14,6 +14,12 @@ class ShopPage extends StatefulWidget {
 class _ShopPageState extends State<ShopPage> {
   void addToCart(Coffee coffee) {
     Provider.of<CoffeeShop>(context, listen: false).addItemToCart(coffee);
+    showDialog(
+      context: context,
+      builder: (context) => const AlertDialog(
+        title: Text("Successfully added to cart"),
+      ),
+    );
   }
 
   @override
@@ -30,16 +36,18 @@ class _ShopPageState extends State<ShopPage> {
               ),
               const SizedBox(height: 25),
               Expanded(
-                  child: ListView.builder(
-                itemCount: value.coffeeShop.length,
-                itemBuilder: (context, index) {
-                  Coffee eachCoffee = value.coffeeShop[index];
-                  return CoffeeTile(
-                    coffee: eachCoffee,
-                    onPressed: () => addToCart(eachCoffee),
-                  );
-                },
-              ))
+                child: ListView.builder(
+                  itemCount: value.coffeeShop.length,
+                  itemBuilder: (context, index) {
+                    Coffee eachCoffee = value.coffeeShop[index];
+                    return CoffeeTile(
+                      coffee: eachCoffee,
+                      onPressed: () => addToCart(eachCoffee),
+                      icon: const Icon(Icons.add),
+                    );
+                  },
+                ),
+              ),
             ],
           ),
         ),

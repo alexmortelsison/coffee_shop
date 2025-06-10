@@ -4,7 +4,12 @@ import 'package:flutter/material.dart';
 class CoffeeTile extends StatelessWidget {
   final Coffee coffee;
   final Function()? onPressed;
-  const CoffeeTile({super.key, required this.coffee, required this.onPressed});
+  final Widget icon;
+  const CoffeeTile(
+      {super.key,
+      required this.coffee,
+      required this.onPressed,
+      required this.icon});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +23,7 @@ class CoffeeTile extends StatelessWidget {
         subtitle: Text(coffee.price),
         leading: Image.asset(coffee.imagePath),
         trailing: IconButton(
-          icon: const Icon(Icons.add),
+          icon: icon,
           onPressed: onPressed,
         ),
       ),
