@@ -12,6 +12,10 @@ class ShopPage extends StatefulWidget {
 }
 
 class _ShopPageState extends State<ShopPage> {
+  void addToCart(Coffee coffee) {
+    Provider.of<CoffeeShop>(context, listen: false).addItemToCart(coffee);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<CoffeeShop>(
@@ -30,7 +34,10 @@ class _ShopPageState extends State<ShopPage> {
                 itemCount: value.coffeeShop.length,
                 itemBuilder: (context, index) {
                   Coffee eachCoffee = value.coffeeShop[index];
-                  return CoffeeTile(coffee: eachCoffee);
+                  return CoffeeTile(
+                    coffee: eachCoffee,
+                    onPressed: () => addToCart(eachCoffee),
+                  );
                 },
               ))
             ],
