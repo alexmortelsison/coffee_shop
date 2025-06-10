@@ -1,3 +1,4 @@
+import 'package:coffee_shop/components/coffee_tile.dart';
 import 'package:coffee_shop/models/coffee.dart';
 import 'package:coffee_shop/models/coffee_shop.dart';
 import 'package:flutter/material.dart';
@@ -29,9 +30,7 @@ class _ShopPageState extends State<ShopPage> {
                 itemCount: value.coffeeShop.length,
                 itemBuilder: (context, index) {
                   Coffee eachCoffee = value.coffeeShop[index];
-                  return ListTile(
-                    title: Text(eachCoffee.name),
-                  );
+                  return CoffeeTile(coffee: eachCoffee);
                 },
               ))
             ],
