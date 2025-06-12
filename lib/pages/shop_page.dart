@@ -16,9 +16,11 @@ class _ShopPageState extends State<ShopPage> {
     Provider.of<CoffeeShop>(context, listen: false).addItemToCart(coffee);
     showDialog(
       context: context,
-      builder: (context) => const AlertDialog(
-        title: Text("Successfully added to cart"),
-      ),
+      builder: (context) {
+        return const AlertDialog(
+          title: Center(child: Text("Added to Cart")),
+        );
+      },
     );
   }
 
@@ -26,30 +28,27 @@ class _ShopPageState extends State<ShopPage> {
   Widget build(BuildContext context) {
     return Consumer<CoffeeShop>(
       builder: (context, value, child) => SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(25),
-          child: Column(
-            children: [
-              const Text(
-                "How would you like your coffee?",
-                style: TextStyle(fontSize: 20),
+        child: Column(
+          children: [
+            const Text(
+              "How do you like your coffee?",
+              style: TextStyle(fontSize: 20),
+            ),
+            const SizedBox(height: 20),
+            Expanded(
+              child: ListView.builder(
+                itemCount: value.coffeeShop.length,
+                itemBuilder: (context, index) {
+                  Coffee eachCoffee = value.coffeeShop[index];
+                  return CoffeeTile(
+                    coffee: eachCoffee,
+                    icon: const Icon(Icons.add),
+                    onPressed: () => addToCart(eachCoffee),
+                  );
+                },
               ),
-              const SizedBox(height: 25),
-              Expanded(
-                child: ListView.builder(
-                  itemCount: value.coffeeShop.length,
-                  itemBuilder: (context, index) {
-                    Coffee eachCoffee = value.coffeeShop[index];
-                    return CoffeeTile(
-                      coffee: eachCoffee,
-                      onPressed: () => addToCart(eachCoffee),
-                      icon: const Icon(Icons.add),
-                    );
-                  },
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

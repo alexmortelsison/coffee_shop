@@ -4,14 +4,9 @@ import 'package:flutter/material.dart';
 class CoffeeShop extends ChangeNotifier {
   final List<Coffee> _shop = [
     Coffee(
-      name: "Long Black",
+      name: "Black Coffee",
       price: "4.10",
       imagePath: "lib/images/black.png",
-    ),
-    Coffee(
-      name: "Latte",
-      price: "4.20",
-      imagePath: "lib/images/latte.png",
     ),
     Coffee(
       name: "Espresso",
@@ -19,24 +14,27 @@ class CoffeeShop extends ChangeNotifier {
       imagePath: "lib/images/espresso.png",
     ),
     Coffee(
-      name: "Iced Coffee",
+      name: "Latte",
       price: "4.40",
+      imagePath: "lib/images/latte.png",
+    ),
+    Coffee(
+      name: "Iced Coffee",
+      price: "4.10",
       imagePath: "lib/images/iced_coffee.png",
     ),
   ];
 
   final List<Coffee> _userCart = [];
-
-  List<Coffee> get coffeeShop => _shop;
-
   List<Coffee> get userCart => _userCart;
+  List<Coffee> get coffeeShop => _shop;
 
   void addItemToCart(Coffee coffee) {
     _userCart.add(coffee);
     notifyListeners();
   }
 
-  void removeItemToCart(Coffee coffee) {
+  void removeItemFromCart(Coffee coffee) {
     _userCart.remove(coffee);
     notifyListeners();
   }

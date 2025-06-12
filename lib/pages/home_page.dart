@@ -1,4 +1,4 @@
-import 'package:coffee_shop/components/bottom_nav_bar.dart';
+import 'package:coffee_shop/components/my_button_navbar.dart';
 import 'package:coffee_shop/const.dart';
 import 'package:coffee_shop/pages/cart_page.dart';
 import 'package:coffee_shop/pages/shop_page.dart';
@@ -12,22 +12,22 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final List<Widget> _pages = [const ShopPage(), const CartPage()];
+
   int _selectedIndex = 0;
 
-  void navigationBottomBar(int index) {
+  void changePage(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
-
-  final List<Widget> _pages = [const ShopPage(), const CartPage()];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundColor,
       bottomNavigationBar: MyButtonNavbar(
-        onTabChange: (index) => navigationBottomBar(index),
+        onTabChange: (index) => changePage(index),
       ),
       body: _pages[_selectedIndex],
     );
